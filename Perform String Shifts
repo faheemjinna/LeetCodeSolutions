@@ -1,0 +1,20 @@
+import static java.lang.Math.random;
+
+class Solution {
+    public String stringShift(String s, int[][] shift) {
+        int totalShift = 0;
+        for (int[] arr : shift) {
+            totalShift += arr[0] == 1 ? arr[1] : -arr[1];
+        }
+        while (totalShift != 0) {
+            if (totalShift < 0) {
+                s = s.substring(1, s.length()) + s.substring(0, 1);
+                totalShift++;
+            } else {
+                s = s.substring(s.length() - 1, s.length()) + s.substring(0, s.length() - 1);
+                totalShift--;
+            }
+        }
+        return s;
+    }
+}
