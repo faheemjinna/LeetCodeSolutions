@@ -1,0 +1,31 @@
+class Solution {
+    public List<String> wordSubsets(String[] words1, String[] words2) {
+        List<String> list = new ArrayList<>();
+        int[] arrMax = new int[26];
+        int letter, count = 0;
+        for (String s : words2) {
+            int[] temp = new int[26];
+            for (char ch : s.toCharArray()) {
+                letter = ch - 'a';
+                temp[letter]++;
+                arrMax[letter] = Math.max(arrMax[letter], temp[letter]);
+            }
+        }
+        for (String s : words1) {
+            int[] temp = new int[26];
+            count=0;
+            for (char ch : s.toCharArray()) {
+                letter = ch - 'a';
+                temp[letter]++;
+            }
+            for (int i = 0; i < 26; i++) {
+                if (arrMax[i] <= temp[i]) {
+                    count++;
+                }
+            }
+            if (count == 26)
+                list.add(s);
+        }
+        return list;
+    }
+}
