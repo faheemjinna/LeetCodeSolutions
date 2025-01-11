@@ -1,0 +1,11 @@
+class Solution {
+    public String mergeAlternately(String word1, String word2) {
+        int max = Math.min(word1.length(), word2.length());
+        String res = "";
+        for (int i = 0; i < max; i++) {
+            res += word1.charAt(i);
+            res += word2.charAt(i);
+        }
+        return res + word1.substring(max,word1.length()) + word2.substring(max,word2.length());
+    }
+}
