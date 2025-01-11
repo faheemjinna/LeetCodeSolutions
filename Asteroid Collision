@@ -1,0 +1,39 @@
+class Solution {
+    public void collideMethod(int temp, Stack<Integer> stk, int[] c) {
+        if (temp > 0) {
+            stk.add(temp);
+            c[0]++;
+        } else {
+            if (stk.isEmpty() || stk.peek() < 0) {
+                stk.add(temp);
+                c[0]++;
+                return;
+            }
+            if (stk.peek() > Math.abs(temp)) {
+                return;
+            } else if (stk.peek() == Math.abs(temp)) {
+                stk.pop();
+                c[0]--;
+                return;
+            } else {
+                stk.pop();
+                c[0]--;
+                collideMethod(temp, stk, c);
+            }
+        }
+    }
+
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stk = new Stack<>();
+        int[] c = { 0 };
+        for (int i = 0; i < asteroids.length; i++) {
+            collideMethod(asteroids[i], stk, c);
+        }
+        int[] ans = new int[c[0]];
+        while (!stk.isEmpty()) {
+            c[0]--;
+            ans[c[0]] = stk.pop();
+        }
+        return ans;
+    }
+}
